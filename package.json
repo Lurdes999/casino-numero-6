@@ -1,0 +1,13 @@
+{
+  "name": "Gana247",
+  "version": "1.0.0",
+  "description": "Sitio web Gana247 con panel de administración",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "ioredis": "^5.3.2"
+  },
+  "devDependencies": {}
+}
+

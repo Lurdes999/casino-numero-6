@@ -139,15 +139,47 @@
   <section class="hero">
     <h1>¡Juga con nosotros las 24h y multiplicá tus chances!</h1>
     <p>Creá tu cuenta enviándonos un WhatsApp. ¡Es fácil y rápido!</p>
-    <a href="https://api.whatsapp.com/send?phone=+5491157552592&text=¡Buen4s!ñ%20Me%20gust4rí4%20cre4r%20un%20usu4rio.%20Mi%20nombre%20es:" class="cta-button" target="_blank" onclick="fbq('trackCustom', 'WhatsAppClick')">
-      <i class="fab fa-whatsapp"></i> Crea tu usuario
+    <a href="#" 
+      id="whatsapp-button"
+      class="cta-button" 
+      target="_blank" 
+      onclick="fbq('trackCustom', 'WhatsAppClick')">
+      <i class='fab fa-whatsapp'></i> ¡Crea tu usuario!
     </a>
   </section>
+  
 
   <section class="info">
     <h2>🎁 Bonos Exclusivos</h2>
     <p>Bonos de bienvenida, recargas y promociones diarias.</p>
     <p>Carga mínima: $2000</p>
   </section>
+  <script>
+    // Cargar número de teléfono dinámicamente desde la API
+    async function loadPhoneNumber() {
+        try {
+            const response = await fetch('/api/phone');
+            const data = await response.json();
+            
+            const phone = data.phone || '5491157552283';
+            const message = data.message || '¡Buen4s!%20Me%20gust4rí4%20cre4r%20un%20usu4rio.%20Mi%20nombre%20es:';
+            
+            const whatsappButton = document.getElementById('whatsapp-button');
+            whatsappButton.href = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`;
+        } catch (error) {
+            console.error('Error al cargar el número de teléfono:', error);
+            // Fallback al número por defecto si hay error
+            const whatsappButton = document.getElementById('whatsapp-button');
+            whatsappButton.href = 'https://api.whatsapp.com/send?phone=5491157552283&text=¡Buen4s!%20Me%20gust4rí4%20cre4r%20un%20usu4rio.%20Mi%20nombre%20es:';
+        }
+    }
+
+    // Cargar cuando la página esté lista
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadPhoneNumber);
+    } else {
+        loadPhoneNumber();
+    }
+</script>
 </body>
 </html>
